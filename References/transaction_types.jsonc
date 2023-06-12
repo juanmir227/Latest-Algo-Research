@@ -1,0 +1,351 @@
+// Transaction types
+{
+    "type0": "pay",
+    "type1": "keyreg",
+    "type2": "acfg",
+    "type3": "axfer",
+    "type4": "afrz",
+    "type5": "appl"
+
+
+// Payment Transaction
+
+  {
+    "txn": {
+      "amt": 5000000, //amount in microalgos
+      "fee": 1000, // fee de la transaccion
+      "fv": 6000000, // La transaccion es valida si entra la ronda esta
+      "gen": "mainnet-v1.0", // genesis Id
+      "gh": "wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8=",// genesis Hash
+      "lv": 6001000, // y esta ronda, sino no es valida
+      "note": "SGVsbG8gV29ybGQ=", // nota opcional
+      "rcv": "GD64YIY3TWGDMCNPP553DZPPR6LDUSFQOIJVFDPPXWEG3FVOJCCDBBHU5A", // reciever address
+      "snd": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4", // sender address
+      "type": "pay" //Esto lo identifica como un pago
+    }
+  }
+
+// Close an account
+
+  {
+    "txn": {
+      "close": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4", // se agrega esta key para mostrar que es de cierre
+      "fee": 1000,
+      "fv": 4695599,
+      "gen": "testnet-v1.0",
+      "gh": "SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=",
+      "lv": 4696599,
+      "rcv": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4",
+      "snd": "SYGHTA2DR5DYFWJE6D4T34P4AWGCG7JTNMY4VI6EDUVRMX7NG4KTA2WMDA",
+      "type": "pay"
+    }
+  }
+
+// Key registration
+
+//Register account online
+//Todos los parametros 'este' son relacionados a la exitencia de una key de participacion
+  {
+    "txn": {
+      "fee": 2000,
+      "fv": 6002000,
+      "gh": "SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=",
+      "lv": 6003000,
+      "selkey": "X84ReKTmp+yfgmMCbbokVqeFFFrKQeFZKEXG89SXwm4=", // este
+      "snd": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4",
+      "type": "keyreg", // aca se muestra que es para registrar la cuentas
+      "votefst": 6000000, // este
+      "votekd": 1730, // este
+      "votekey": "eXq34wzh2UIxCZaI1leALKyAvSz/+XOe0wqdHagM+bw=", // este
+      "votelst": 9000000 // este
+    }
+  }
+
+// Register account offline
+
+  {
+    "txn": {
+      "fee": 1000,
+      "fv": 7000000,
+      "gh": "SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=",
+      "lv": 7001000,
+      "snd": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4",
+      "type": "keyreg"
+    }
+  }
+
+// Asset configuration transaction
+
+//Create an asset
+// Es creacion porque no esta el parametro "caid"  y hay parametros de creacion "asset parameters: apar"
+  {
+    "txn": {
+      "apar": {
+        "am": "gXHjtDdtVpY7IKwJYsJWdCSrnUyRsX4jr3ihzQ2U9CQ=", // metadata hash
+        "an": "My New Coin", // asset name
+        "au": "developer.algorand.org", // asset URL
+        "c": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4", // clawback
+        "dc": 2, //decimales
+        "f": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4", //freeze
+        "m": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4", // manager
+        "r": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4", // reserve
+        "t": 50000000, // total base units of the asset. Hay que dividirlo por 10**dc en este caso 100. Por lo que el total es 500.000
+        "un": "MNC" // unit name
+      },
+      "fee": 1000,
+      "fv": 6000000,
+      "gh": "SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=",
+      "lv": 6001000,
+      "snd": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4",
+      "type": "acfg" // con esto sabemos que es una transaccion del tipo asset config
+    }
+  }
+
+// Reconfigurar un assetransaction["txn"]["type"]
+// Aca se le agrega el "caid"
+  {
+    "txn": {
+      "apar": {                                                            // Estas 4 son las que se pueden reconfigurar
+        "c": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4", // esta
+        "f": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4", // esta
+        "m": "QC7XT7QU7X6IHNRJZBR67RBMKCAPH67PCSX4LYH4QKVSQ7DQZ32PG5HSVQ", // esta
+        "r": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4" // esta
+      },
+      "caid": 168103,
+      "fee": 1000,
+      "fv": 6002000,
+      "gh": "SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=",
+      "lv": 6003000,
+      "snd": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4",
+      "type": "acfg"
+    }
+  }
+  
+// Destroy an asset
+// Como no hay prametros del asset lo destruye
+  {
+    "txn": {
+      "caid": 168103,
+      "fee": 1000,  
+      "fv": 7000000,
+      "gh": "SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=",
+      "lv": 7001000,
+      "snd": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4",
+      "type": "acfg"
+    }
+  }
+
+// Asset transfer
+
+//Opt-in to an asset : supone que el que recibe todavia no tiene un asset de ese tipo
+
+  {
+    "txn": {
+      "arcv": "QC7XT7QU7X6IHNRJZBR67RBMKCAPH67PCSX4LYH4QKVSQ7DQZ32PG5HSVQ",
+      "fee": 1000,
+      "fv": 6631154,
+      "gh": "SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=",
+      "lv": 6632154,
+      "snd": "QC7XT7QU7X6IHNRJZBR67RBMKCAPH67PCSX4LYH4QKVSQ7DQZ32PG5HSVQ",
+      "type": "axfer", // esto me muestra que es de tipo asset transfer
+      "xaid": 168103 // transfered asset id
+    }
+  }
+
+// Transfer an asset: supone que el recpetor ya tiene un asset de ese tipo
+
+  {
+    "txn": {
+      "aamt": 1000000,
+      "arcv": "QC7XT7QU7X6IHNRJZBR67RBMKCAPH67PCSX4LYH4QKVSQ7DQZ32PG5HSVQ",
+      "fee": 3000,
+      "fv": 7631196,
+      "gh": "SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=",
+      "lv": 7632196,
+      "snd": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4",
+      "type": "axfer",
+      "xaid": 168103
+    }
+  }
+
+// Revoke an asset
+
+  {
+    "txn": {
+      "aamt": 500000,
+      "arcv": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4",
+      "asnd": "QC7XT7QU7X6IHNRJZBR67RBMKCAPH67PCSX4LYH4QKVSQ7DQZ32PG5HSVQ", //Asset sender
+      // La existencia de esta key nos muestra que es un revoke usando clawback
+      "fee": 1000,
+      "fv": 7687457,
+      "gh": "SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=",
+      "lv": 7688457,
+      "snd": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4",
+      "type": "axfer",
+      "xaid": 168103
+    }
+  }
+
+// Asset freeze
+
+  {
+    "txn": {
+      "afrz": true, // para unfreezearlo es necesario cambiar esto a false
+      "fadd": "QC7XT7QU7X6IHNRJZBR67RBMKCAPH67PCSX4LYH4QKVSQ7DQZ32PG5HSVQ", // address del asset
+      "faid": 168103, //el id del asset a freezear
+      "fee": 1000,
+      "fv": 7687793,
+      "gh": "SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=",
+      "lv": 7688793,
+      "snd": "EW64GC6F24M7NDSC5R3ES4YUVE3ZXXNMARJHDCCCLIHZU6TBEOC7XRSBG4",
+      "type": "afrz" // esto me muestra que es de tipo freeze
+    }
+  }
+
+// Application call transaction
+
+// Application create transaction
+
+//Assuming all the balance and signature checks pass, this will create an Application with a new AppId and subsequent calls.
+
+  {
+    "txn": {
+      "apap": "BYEB", // application approval program
+      "apgs": { //application global state
+        "nbs": 1, //bytes
+        "nui": 1 // ints
+      },
+      "apls": { //application local state
+        "nbs": 1, //bytes
+        "nui": 1 // ints
+      },
+      "apsu": "BYEB", // application clear program
+      "fee": 1000,
+      "fv": 12774,
+      "gh": "ALXYc8IX90hlq7olIdloOUZjWfbnA3Ix1N5vLn81zI8=",
+      "lv": 13774,
+      "note": "poeVkF5j4MU=", //optional note
+      "snd": "FOZF4CMXLU2KDWJ5QARE3J2U7XELSXL7MWGNWUHD7OPKGQAI4GPSMGNLCE",
+      "type": "appl" // con esta key sabemos que es de tipo application
+    }
+  }
+
+// Application update transaction
+
+  {
+    "txn": {
+      "apan": 4, // On complete is set to Update Application (4)
+      "apap": "BYEB",
+      "apid": 51, // id de la app being updated
+      "apsu": "BYEB",
+      "fee": 1000,
+      "fv": 12973,
+      "gh": "ALXYc8IX90hlq7olIdloOUZjWfbnA3Ix1N5vLn81zI8=",
+      "lv": 13973,
+      "note": "ATFKEwKGqLk=",
+      "snd": "FOZF4CMXLU2KDWJ5QARE3J2U7XELSXL7MWGNWUHD7OPKGQAI4GPSMGNLCE",
+      "type": "appl"
+    }
+  }
+
+// Application delete transaction
+
+  {
+    "txn": {
+      "apan": 5, // el 5 es DeleteApplication
+      "apid": 51,
+      "fee": 1000,
+      "fv": 13555,
+      "gh": "ALXYc8IX90hlq7olIdloOUZjWfbnA3Ix1N5vLn81zI8=",
+      "lv": 14555,
+      "note": "V/RAbQ57DnI=",
+      "snd": "FOZF4CMXLU2KDWJ5QARE3J2U7XELSXL7MWGNWUHD7OPKGQAI4GPSMGNLCE",
+      "type": "appl"
+    }
+  }
+
+// Application opt-in transaction
+
+//An Application Opt-In transaction must be submitted by an account in order for the local state for that account to be used.
+
+  {
+
+  "txn": {
+    "apan": 1, // 1 significa OptIn(1)
+    "apid": 51,
+    "fee": 1000,
+    "fv": 13010,
+    "gh": "ALXYc8IX90hlq7olIdloOUZjWfbnA3Ix1N5vLn81zI8=",
+    "lv": 14010,
+    "note": "SEQpWAYkzoU=",
+    "snd": "LNTMAFSF43V7RQ7FBBRAWPXYZPVEBGKPNUELHHRFMCAWSARPFUYD2A623I",
+    "type": "appl"
+  }
+}
+
+
+// Application close out transaction
+
+//An Application Close Out transaction is used when an account wants to opt out of a contract gracefully and remove 
+//its local state from its balance record
+
+  {
+    "txn": {
+      "apan": 2, // 2 significa CloseOut(2)
+      "apid": 51,
+      "fee": 1000,
+      "fv": 13166,
+      "gh": "ALXYc8IX90hlq7olIdloOUZjWfbnA3Ix1N5vLn81zI8=",
+      "lv": 14166,
+      "note": "HFL7S60gOdM=",
+      "snd": "LNTMAFSF43V7RQ7FBBRAWPXYZPVEBGKPNUELHHRFMCAWSARPFUYD2A623I",
+      "type": "appl"
+    }
+  }
+
+// Application clear state transaction
+
+// The Clear program is used by the application to perform any book keeping necessary to remove the Account from it's records.
+
+  {
+    "txn": {
+      "apan": 3, // 3 es ClearState(3)
+      "apid": 51,
+      "fee": 1000,
+      "fv": 13231,
+      "gh": "ALXYc8IX90hlq7olIdloOUZjWfbnA3Ix1N5vLn81zI8=",
+      "lv": 14231,
+      "note": "U93ZQy24zJ0=",
+      "snd": "LNTMAFSF43V7RQ7FBBRAWPXYZPVEBGKPNUELHHRFMCAWSARPFUYD2A623I",
+      "type": "appl"
+    }
+  }
+
+//Application NoOp transaction
+
+  {
+    "txn": {
+      "apaa": [ // transaction specific arguments accedidos por la aplicacion
+        "ZG9jcw==",
+        "AAAAAAAAAAE="
+      ],
+      "apas": [ // Foreign assets
+        16
+      ],
+      "apat": [
+        "4RLXQGPZVVRSXQF4VKZ74I6BCUD7TUVROOUBCVRKY37LQSHXORZV4KCAP4" // Accounts, tiene un address
+      ],
+      "apfa": [ // foreign app
+        10
+      ],
+      "apid": 51,
+      "fee": 1000,
+      "fv": 13376,
+      "gh": "ALXYc8IX90hlq7olIdloOUZjWfbnA3Ix1N5vLn81zI8=",
+      "lv": 14376,
+      "note": "vQXvgqySYPY=",
+      "snd": "LNTMAFSF43V7RQ7FBBRAWPXYZPVEBGKPNUELHHRFMCAWSARPFUYD2A623I",
+      "type": "appl"
+    }
+}
+}
