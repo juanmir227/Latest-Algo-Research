@@ -16,8 +16,6 @@ def make_df(transacciones):
     a = 0
     zero_address = "0000000000000000000000000000000000000000000000000000000000"
     for transaction in transacciones:
-        print(a)
-        a = a + 1
         type = transaction['txn']['type']
         txn_type.append(type)
         date_ts = transaction['date']

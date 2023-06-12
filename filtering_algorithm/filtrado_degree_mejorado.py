@@ -9,8 +9,8 @@ import numpy as np
 #periodo 2: 14800000-17400000
 #periodo 3: 17600000-23000000
 #Hice incrementos de 50000 bloques y saque 500 bloques
-
-
+total_blacklisted_addresses = []
+data_frames = []
 threshold = 300
 number_of_blocks = 500
 increment = 50000
@@ -66,15 +66,23 @@ for init_number in initial_number:
     for element in temp:
         if element[1] > avg_degree*threshold:
             blacklisted_addresses.append(element[0])
+    data_frames.append(filtered)
+    total_blacklisted_addresses.append(blacklisted_addresses)
 
-    print(blacklisted_addresses)
-    
-    final_filtered = filtered
+complete_blacklisted_accounts = list(set(sum(total_blacklisted_addresses,[])))
 
-    for blacklisted_address in blacklisted_addresses:
-        final_filtered = final_filtered[final_filtered['Sender Address'] != blacklisted_address]
-        final_filtered = final_filtered[final_filtered['Receiver Address'] != blacklisted_address]
-    print(final_filtered.shape[0])
 
-    G = nx.from_pandas_edgelist(final_filtered,'Sender Address', 'Receiver Address')
+for i,dataframe in enumerate(data_frames):
+    for blacklisted_address in complete_blacklisted_accounts:
+        dataframe = dataframe[dataframe['Sender Address'] != blacklisted_address]
+        dataframe = dataframe[dataframe['Receiver Address'] != blacklisted_address]
+        print(dataframe.shape[0])
+    init_number = initial_number[i]
+    G = nx.from_pandas_edgelist(dataframe,'Sender Address', 'Receiver Address')
+    if 11000000<=init_number<=14600000:
+        periodo = '1'
+    if 14800000<=init_number<=17400000:
+        periodo = '2'
+    if 17600000<=init_number<=23000000:
+        periodo = '3'
     nx.write_gexf(G,r'D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\filtering_algorithm\periodo'+periodo+'_gephi\periodo'+periodo+'_'+str(init_number)+'_'+str(number_of_blocks)+'.gexf')
