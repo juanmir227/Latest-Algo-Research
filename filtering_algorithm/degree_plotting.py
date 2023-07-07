@@ -3,13 +3,17 @@ import pickle
 import os
 from dotenv import load_dotenv
 load_dotenv()
-from get_blocks import GetBlockInfo
-from acquire_txns import join_txns
-from txns_dataframe import make_df
+from functions.get_blocks import GetBlockInfo
+# from get_blocks import GetBlockInfo
+from functions.acquire_txns import join_txns
+from functions.txns_dataframe import make_df
+# from acquire_txns import join_txns
+# from txns_dataframe import make_df
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
+
 #periodo 1: 11000000-14600000
 #periodo 2: 14800000-17400000
 #periodo 3: 17600000-23000000
@@ -24,7 +28,7 @@ mean_degree_evolution = []
 
 
 for init_block in initial_number:
-    with open(r'D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\Try_periods\periodo1_data_frame\df_'+ str(init_block)+"_"+str(number_of_blocks)+'_filtered', 'rb') as fp:
+    with open(r'D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\filtering_algorithm\periodo1_dataframe\df_'+ str(init_block)+"_"+str(number_of_blocks)+'_filtered', 'rb') as fp:
         df = pickle.load(fp)
     # print(len(df['Sender Address'].tolist()))
     G = nx.from_pandas_edgelist(df,'Sender Address', 'Receiver Address')

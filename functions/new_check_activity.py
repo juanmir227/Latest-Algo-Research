@@ -21,7 +21,7 @@ def check_activity(initial_block, final_block, increment, number_of_blocks,path)
     df_list = []
     for init_number in initial_numbers:
         path = path
-        df_list.append(pd.read_pickle(path+ str(init_number) + "_" + str(number_of_blocks) + "_filtered"))
+        df_list.append(pd.read_pickle(path+ str(init_number) + "_" + str(number_of_blocks)))
     address = []
     df_merged = pd.concat(df_list)
     senders = df_merged['Sender Address'].tolist()

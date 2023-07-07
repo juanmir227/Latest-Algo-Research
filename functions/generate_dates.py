@@ -25,16 +25,14 @@ number_of_blocks = 500
 dates = []
 block = initial_block
 initial_number = list(range(initial_block, final_block + increment, increment))
-print(initial_number)
 
 for number in initial_number:
     # print(number)
-    path = r"D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\periodo3_data_frame\df"
-    df = pd.read_pickle(path + "__" + str(number) + "_" + str(number_of_blocks))
+    path = r"D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\filtering_algorithm\periodo3_dataframe\periodo3"
+    df = pd.read_pickle(path + "_" + str(number) + "_" + str(number_of_blocks))
     date = df['Transaction Date'].tolist()[0].date()
     dates.append(date)
     block = block + increment
 
-with open(r"D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\periodo3_lists_csv\periodo3_dates", 'wb') as fp:
+with open(r"D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\filtering_algorithm\periodo3_lists\periodo3_dates", 'wb') as fp:
     pickle.dump(dates, fp)
-print(len(dates))

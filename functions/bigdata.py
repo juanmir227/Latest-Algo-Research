@@ -19,8 +19,8 @@ from new_check_activity import check_activity
 
 
 
-initial_block = 17600000
-final_block = 23000000
+initial_block = 11000000
+final_block = 14600000
 number_of_blocks = 500
 increment = 50000
 initial_number = list(range(initial_block, final_block + increment, increment))
@@ -72,14 +72,14 @@ percentages_per_type = []
 
 
 #checkeo actividad
-path = r"D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\periodo3_data_frame\df_"
+path = r"D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\filtering_algorithm\periodo1_dataframe\periodo1_"
 total_activity = check_activity(initial_block,final_block, increment, number_of_blocks, path)
 
 #ahora si corro todo el programa
 bar = Bar('Processing...', max=len(initial_number))
 
 for init_number in initial_number:
-    df = pd.read_pickle(path+str(init_number)+"_"+str(number_of_blocks)+"_filtered")
+    df = pd.read_pickle(path+str(init_number)+"_"+str(number_of_blocks))
 
     sender = df['Sender Address'].tolist()
     receiver = df['Receiver Address'].tolist()
@@ -466,5 +466,5 @@ percentage_of_total_accounts_per_asset, transactions_one_algo, involved_accounts
 percentage_of_total_accounts_per_type, transaction_amount_in_microalgo, closing_transactions_count, more_than_one_algo,
 more_than_one_algo_percentage, mean_amount_of_algo_sent, percentage_of_all_transactions_per_type, transaction_type_percentages_of_total_transactions,total_activity]
 
-with open('D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\periodo3_lists_csv\periodo3_data_lists', 'wb') as fp:
+with open(r'D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\filtering_algorithm\periodo1_lists\periodo1_data_lists', 'wb') as fp:
     pickle.dump(data_lists, fp)
