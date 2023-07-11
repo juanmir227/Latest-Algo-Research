@@ -124,12 +124,5 @@ def make_df(transacciones):
         'Transaction Date': txn_date,
         'Transaction note': notes
     }
-    # print(len(snd_addresses))
-    # print(len(rcv_addresses))
-    # print(len(txn_type))
-    # print(len(txn_block))
-    # print(len(amount))
-    # print(len(asset_id))
-    # print(len(txn_date))
-    # print(len(notes))
+
     return data
