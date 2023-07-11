@@ -99,13 +99,13 @@ print(f'R_2 Power Law:{r2_score(values,prediction)}')
 print(f'R_2 Stretched Exponential:{r2_score(values, y)}')
 
 
-# G_barabasi = nx.barabasi_albert_graph(970,1)
-# temp_barabasi = list(G_barabasi.degree())
-# degree_list_barabasi = []
-# for element in temp_barabasi:
-#     degree_list_barabasi.append(element[1])
-# n_barbasi, bins_barbasi, patches = plt.hist(degree_list_barabasi, bins = 20, range = (1,21))
-# plt.show()
+G_barabasi = nx.barabasi_albert_graph(1656,1)
+temp_barabasi = list(G_barabasi.degree())
+degree_list_barabasi = []
+for element in temp_barabasi:
+    degree_list_barabasi.append(element[1])
+n_barbasi, bins_barbasi, patches = plt.hist(degree_list_barabasi, bins = 20, range = (1,21))
+plt.show()
 # bins_barbasi = bins_barbasi[:-1]
 # error_barabasi = np.sqrt(n_barbasi)
 # print(n_barbasi,bins_barbasi)

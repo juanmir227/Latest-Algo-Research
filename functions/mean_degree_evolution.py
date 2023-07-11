@@ -53,9 +53,20 @@ for init_number in initial_number:
     # print(degree_list)
     mean_degree_evolution.append(np.mean(np.array(degree_list)))
 
+
+
+with open(r'D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\filtering_algorithm\periodo1_lists\periodo1_dates', 'rb') as file:
+    chunk_dates_1 = pickle.load(file)
+with open(r'D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\filtering_algorithm\periodo2_lists\periodo2_dates', 'rb') as file:
+    chunk_dates_2 = pickle.load(file)
+with open(r'D:\Archivos de Programa\Carpetas\Coding\Algorand\Tesis\Tesis\filtering_algorithm\periodo3_lists\periodo3_dates', 'rb') as file:
+    chunk_dates_3 = pickle.load(file)
+
+
+chunk_dates = chunk_dates_1 + chunk_dates_2 + chunk_dates_3
 filtered_mean_degree = savgol_filter(mean_degree_evolution, 30,7)
-plt.plot(filtered_mean_degree, color = 'red', label = 'filtered')
-plt.plot(mean_degree_evolution, color = 'pink', label = 'data')
+plt.plot(chunk_dates,filtered_mean_degree, color = 'red', label = 'filtered')
+plt.plot(chunk_dates, mean_degree_evolution, color = 'pink', label = 'data')
 plt.xlabel('Date')
 plt.ylabel('Mean Degree')
 plt.legend()
