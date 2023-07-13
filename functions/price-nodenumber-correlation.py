@@ -23,7 +23,7 @@ for date in dates:
     date_mean_price = (float(date_row['Open']) + float(date_row['Close']))/2
     mean_price.append(date_mean_price)
 corr_coef = np.corrcoef(mean_price, number_of_nodes)[0,1]
-
+corr_coef = np.round(corr_coef,2)
 plt.plot(dates, mean_price/np.max(mean_price), label = 'price')
 plt.plot(dates,number_of_nodes/np.max(number_of_nodes), label = 'number of nodes')
 plt.legend()
@@ -32,7 +32,7 @@ plt.ylabel('price-number of nodes')
 plt.title('Number of nodes vs price correlation')
 plt.text(0,0,f'Corr Coef ={corr_coef}')
 plt.show()
-print(corr_coef)
+print(f'Coeficiente de correlacion: {corr_coef}')
 
 plt.plot(dates, number_of_nodes)
 plt.show()
