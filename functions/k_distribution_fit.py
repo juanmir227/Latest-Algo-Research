@@ -18,7 +18,7 @@ from scipy.stats import kstest
 #Hice incrementos de 50000 bloques y saque 500 bloques
 
 initial_block = 11000000
-final_block = 19400000
+final_block = 18000000
 number_of_blocks = 500
 increment = 50000
 initial_number = list(range(initial_block, final_block + increment, increment))
